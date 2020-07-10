@@ -1,0 +1,51 @@
+\documentclass[12pt,a4paper]{article}
+
+\makeatletter
+	\input{../config/header[fr].sty}
+
+	\usepackage{01-basic-operators}
+\makeatother
+
+
+
+\begin{document}
+
+\section{Arithmétique}
+
+\subsection{Opérateurs de base}
+
+Pour des raisons d'expressivité des codes \LaTeX{}, les opérateurs binaires \macro{divides}, \macro{ndivides} et \macro{modulo} ont été ajoutés comme alias respectifs de \macro{mid}, \macro{nmid} et \macro{bmod} qui sont proposés par le package \verb+amssymb+. Un opérateur \macro{nequiv} a été aussi ajouté.
+
+\begin{latexex}
+$10 \divides 150$ au lieu de
+$10 | 150$
+
+$10 \ndivides 154$ au lieu de
+$10 \not| 154$
+
+$a \nequiv b \modulo p
+ \iff
+ p \ndivides (a - b)$.
+\end{latexex}
+
+
+% ---------------------- %
+
+
+\subsubsection{Fiches techniques}
+
+\paragraph{Arithmétique -- Opérateurs de base}
+
+\IDmacro*{divides}{0}
+
+\IDmacro*{ndivides}{0}
+
+\extraspace
+
+\IDmacro*{nequiv}{0}
+
+\extraspace
+
+\IDmacro*{modulo}{0}
+
+\end{document}

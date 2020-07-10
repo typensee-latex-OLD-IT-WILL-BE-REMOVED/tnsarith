@@ -1,0 +1,152 @@
+\documentclass[12pt,a4paper]{article}
+
+\makeatletter
+    \input{../config/header[fr].sty}
+
+    \usepackage{02-continued-fraction}
+\makeatother
+
+
+\begin{document}
+
+%\subsection{Arithmétiques}
+
+\subsection{Fractions continuées}
+
+\subsubsection{Fractions continuées standard}
+
+\newparaexample*{}
+
+Dans l'exemple suivant, la notation en ligne semble être due à Alfred Pringsheim. La notation à gauche utilise toujours le maximum d'espace pour améliorer la lisibilité.
+
+\begin{latexex-flat}
+ $\contfrac {u_0 | u_1 | u_2 | \dots | u_n}
+= \contfrac*{u_0 | u_1 | u_2 | \dots | u_n}$
+\end{latexex-flat}
+
+
+% ---------------------- %
+
+
+\subsubsection{Fiches techniques}
+
+\paragraph{Fractions continuées standard}
+
+\IDmacro*{contfrac}{1}
+
+\IDmacro*{contfrac*}{1}
+
+\IDarg{} tous les éléments de la fraction continuée séparés par des \verb+|+.
+
+
+% ---------------------- %
+
+
+\subsubsection{Fractions continuées généralisées}
+
+\newparaexample*{}
+
+Voici comment écrire une fraction continuée généralisée.
+
+\begin{latexex-flat}
+ $\displaystyle
+  \contfracgene {a | b | c | d | e | f | \dots | y | z}
+= \contfracgene*{a | b | c | d | e | f | \dots | y | z}$
+\end{latexex-flat}
+
+
+% ---------------------- %
+
+
+\subsubsection{Fiches techniques}
+
+\paragraph{Fractions continuées généralisées}
+
+\IDmacro*{contfracgene}{1}
+
+\IDmacro*{contfracgene*}{1}
+
+\IDarg{} tous les éléments de la fraction continuée généralisée séparés par des \verb+|+.
+
+
+% ---------------------- %
+
+
+\subsubsection{Comme une fraction continuée isolée}
+
+\newparaexample*{}
+
+La raison d'être de la macro ci-dessous vient juste de son usage en interne.
+
+\begin{latexex}
+$\singlecontfrac{a}{b}$
+pour les fous\dots :-)
+\end{latexex}
+
+
+% ---------------------- %
+
+
+\subsubsection{Fiches techniques}
+
+\paragraph{Comme une fraction continuée isolée}
+
+\IDmacro*{singlecontfrac}{2}
+
+\IDarg{1} le pseudo numérateur.
+
+\IDarg{2} le pseudo dénominateur.
+
+
+% ---------------------- %
+
+
+\subsubsection{\texorpdfstring{L'opérateur $\contfracope$}%
+                               {L'opérateur K}}
+
+\newparaexample{}
+
+La notation suivante est proche de celle qu'utilisait Carl Friedrich Gauss.
+
+\begin{latexex-flat}
+ $\displaystyle
+  \contfracope_{k=1}^{n} (b_k:c_k)
+= \cfrac{b_1}%
+        {\contfracgene{c_1 | b_2 | c_2 | b_3 | \dots | b_n | c_n}}$
+\end{latexex-flat}
+
+
+\begin{remark}
+    La lettre $\contfracope $vient de "kettenbruch" qui signifie "fraction continuée" en allemand.
+\end{remark}
+
+
+% ---------------------- %
+
+
+\newparaexample{}
+
+\begin{latexex-flat}
+ $\displaystyle
+  u_0 + \contfracope_{k=1}^{n} (1:u_k)
+= \contfrac{u_0 | u_1 | u_2 | \dots | u_n}$
+\end{latexex-flat}
+
+
+% ---------------------- %
+
+
+\subsubsection{Fiches techniques}
+
+\paragraph{\texorpdfstring{Fractions continuées -- L'opérateur $\contfracope$}%
+                          {Fractions continuées -- L'opérateur K}}
+
+La macro suivante sans argument a un comportement spécifique vis à vis des mises en index et en exposant. 
+
+
+\separation
+
+
+\IDmacro*{contfracope}{0}
+
+\end{document}

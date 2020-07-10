@@ -1,0 +1,102 @@
+% == PACKAGES USED == %
+
+\RequirePackage{mathtools}
+\RequirePackage{ifmtarg}
+
+
+% == DEFINITIONS == %
+
+% Sources :
+%    * https://groups.google.com/forum/?hl=fr&fromgroups#!topic/fr.comp.text.tex/UrUZiurKwm0
+%    * http://tex.stackexchange.com/questions/68190/continued-fraction-in-inline-equations/68196#68196
+%    * http://tex.stackexchange.com/questions/23432/how-to-create-my-own-math-operator-with-limits
+
+% Operator
+\newcommand\contfracope{%
+    \operatornamewithlimits{%
+        \mathchoice{% * Display style
+            \vcenter{\hbox{\huge $\mathcal{K}$}}%
+        }{%           * Text style
+            \vcenter{\hbox{\Large $\mathcal{K}$}}%
+        }{%           * Script style
+            \mathrm{\mathcal{K}}%
+        }{%           * Script script style
+            \mathrm{\mathcal{K}}%
+        }
+    }
+}
+
+% Single continued fraction (useful ?)
+\newcommand\singlecontfrac[2]{%
+    \begin{array}{@{}c@{}}%
+        \multicolumn{1}{c|}{#1}%
+        \\%
+        \hline%
+        \multicolumn{1}{|c}{#2}%
+    \end{array}%
+}
+
+% Standard continued fraction
+\newcommand\contfrac{\@ifstar{\@contfrac@star}{\@contfrac@no@star}}
+
+\newcommand\@contfrac@no@star[1]{%
+    \@contfrac@no@star@recu@#1|\@nil%
+}
+\def\@contfrac@no@star@recu@#1|#2\@nil{%
+    \@ifmtarg{#2}{%
+        #1%
+    }{%
+        #1 + \cfrac{1}{\@contfrac@no@star@recu@#2\@nil}%
+    }%
+}
+
+\newcommand\@contfrac@star[1]{%
+    \@contfrac@star@before@#1|\@nil%
+}
+\def\@contfrac@star@before@#1|#2\@nil{%
+    \@ifmtarg{#2}{%
+        #1%
+    }{%
+        #1 \@contfrac@star@recu@#2\@nil%
+    }%
+}
+\def\@contfrac@star@recu@#1|#2\@nil{%
+    \@ifmtarg{#2}{%
+        + \singlecontfrac{1}{#1}%
+    }{%
+        + \singlecontfrac{1}{#1} \@contfrac@star@recu@#2\@nil%
+    }%
+}
+
+% Generalized continued fraction
+\newcommand\contfracgene{\@ifstar{\@contfracgene@star}{\@contfracgene@no@star}}
+
+\newcommand\@contfracgene@no@star[1]{%
+    \@contfracgene@no@star@recu@#1||\@nil%
+}
+\def\@contfracgene@no@star@recu@#1|#2|#3\@nil{%
+    \@ifmtarg{#2}{%
+        #1%
+    }{%
+        #1 + \cfrac{#2}{\@contfracgene@no@star@recu@#3\@nil}%
+    }%
+}
+
+
+\newcommand\@contfracgene@star[1]{%
+    \@contfracgene@star@before@#1|\@nil%
+}
+\def\@contfracgene@star@before@#1|#2\@nil{%
+    \@ifmtarg{#2}{%
+        #1%
+    }{%
+        #1 \@contfracgene@star@recu@#2\@nil%
+    }%
+}
+\def\@contfracgene@star@recu@#1|#2|#3\@nil{%
+    \@ifmtarg{#3}{%
+        + \singlecontfrac{#1}{#2}%
+    }{%
+        + \singlecontfrac{#1}{#2} \@contfracgene@star@recu@#3\@nil%
+    }%
+}

@@ -1,0 +1,391 @@
+%\documentclass[12pt,a4paper]{scrartcl}
+\documentclass[12pt,a4paper]{article}
+
+\makeatletter % Technical doc - START
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{ucs}
+
+\usepackage[french]{babel,varioref}
+
+\usepackage[top=2cm, bottom=2cm, left=1.5cm, right=1.5cm]{geometry}
+\usepackage{enumitem}
+
+\usepackage{multicol}
+
+\usepackage{makecell}
+
+\usepackage{color}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+
+\usepackage{amsthm}
+
+\usepackage{tcolorbox}
+\tcbuselibrary{listingsutf8}
+
+\usepackage{ifplatform}
+
+\usepackage{ifthen}
+
+\usepackage{cbdevtool}
+
+
+
+% MISC
+
+\newtcblisting{latexex}{%
+	sharp corners,%
+	left=1mm, right=1mm,%
+	bottom=1mm, top=1mm,%
+	colupper=red!75!blue,%
+	listing side text
+}
+
+\newtcblisting{latexex-flat}{%
+	sharp corners,%
+	left=1mm, right=1mm,%
+	bottom=1mm, top=1mm,%
+	colupper=red!75!blue,%
+}
+
+\newtcblisting{latexex-alone}{%
+	sharp corners,%
+	left=1mm, right=1mm,%
+	bottom=1mm, top=1mm,%
+	colupper=red!75!blue,%
+	listing only
+}
+
+
+\newcommand\env[1]{\texttt{#1}}
+\newcommand\macro[1]{\env{\textbackslash{}#1}}
+
+
+
+\setlength{\parindent}{0cm}
+\setlist{noitemsep}
+
+\theoremstyle{definition}
+\newtheorem*{remark}{Remarque}
+
+\usepackage[raggedright]{titlesec}
+
+\titleformat{\paragraph}[hang]{\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
+\titlespacing*{\paragraph}{0pt}{3.25ex plus 1ex minus .2ex}{0.5em}
+
+
+\newcommand\separation{
+	\medskip
+	\hfill\rule{0.5\textwidth}{0.75pt}\hfill
+	\medskip
+}
+
+
+\newcommand\extraspace{
+	\vspace{0.25em}
+}
+
+
+\newcommand\whyprefix[2]{%
+	\textbf{\prefix{#1}}-#2%
+}
+
+\newcommand\mwhyprefix[2]{%
+	\texttt{#1 = #1-#2}%
+}
+
+\newcommand\prefix[1]{%
+	\texttt{#1}%
+}
+
+
+\newcommand\inenglish{\@ifstar{\@inenglish@star}{\@inenglish@no@star}}
+
+\newcommand\@inenglish@star[1]{%
+	\emph{\og #1 \fg}%
+}
+
+\newcommand\@inenglish@no@star[1]{%
+	\@inenglish@star{#1} en anglais%
+}
+
+
+\newcommand\ascii{\texttt{ASCII}}
+
+
+% Example
+\newcounter{paraexample}[subsubsection]
+
+\newcommand\@newexample@abstract[2]{%
+	\paragraph{%
+		#1%
+		\if\relax\detokenize{#2}\relax\else {} -- #2\fi%
+	}%
+}
+
+
+
+\newcommand\newparaexample{\@ifstar{\@newparaexample@star}{\@newparaexample@no@star}}
+
+\newcommand\@newparaexample@no@star[1]{%
+	\refstepcounter{paraexample}%
+	\@newexample@abstract{Exemple \theparaexample}{#1}%
+}
+
+\newcommand\@newparaexample@star[1]{%
+	\@newexample@abstract{Exemple}{#1}%
+}
+
+
+% Change log
+\newcommand\topic{\@ifstar{\@topic@star}{\@topic@no@star}}
+
+\newcommand\@topic@no@star[1]{%
+	\textbf{\textsc{#1}.}%
+}
+
+\newcommand\@topic@star[1]{%
+	\textbf{\textsc{#1} :}%
+}
+
+\makeatother % Technical doc - END
+
+
+\usepackage{ tnsarith }
+
+
+\begin{document}
+
+\renewcommand\labelitemi{\raisebox{0.125em}{\tiny\textbullet}}
+\renewcommand{\labelitemii}{---}
+
+\title{   %
+	Le package \texttt{ tnsarith }\\%
+	{\footnotesize Code source disponible sur \url{ https://github.com/typensee-latex/tnstools.git }.}\\%
+{\footnotesize Version \texttt{0.0.0-beta} développée et testée sur \macosxname{}.}%
+}
+\author{Christophe BAL}
+\date{2020-07-10}{{
+
+\maketitle
+
+
+\vspace{2em}
+
+\hrule
+
+\tableofcontents
+
+\vspace{1.5em}
+
+\hrule
+
+\newpage
+
+\section{Introduction}
+
+Le package \verb+tnsarith+ propose quelques macros pour rédiger un peu d'arithmétique.
+\section{Arithmétique}
+
+\subsection{Opérateurs de base}
+
+Pour des raisons d'expressivité des codes \LaTeX{}, les opérateurs binaires \macro{divides}, \macro{ndivides} et \macro{modulo} ont été ajoutés comme alias respectifs de \macro{mid}, \macro{nmid} et \macro{bmod} qui sont proposés par le package \verb+amssymb+. Un opérateur \macro{nequiv} a été aussi ajouté.
+
+\begin{latexex}
+$10 \divides 150$ au lieu de
+$10 | 150$
+
+$10 \ndivides 154$ au lieu de
+$10 \not| 154$
+
+$a \nequiv b \modulo p
+ \iff
+ p \ndivides (a - b)$.
+\end{latexex}
+
+
+% ---------------------- %
+%\subsection{Arithmétiques}
+
+\subsection{Fractions continuées}
+
+\subsubsection{Fractions continuées standard}
+
+\newparaexample*{}
+
+Dans l'exemple suivant, la notation en ligne semble être due à Alfred Pringsheim. La notation à gauche utilise toujours le maximum d'espace pour améliorer la lisibilité.
+
+\begin{latexex-flat}
+ $\contfrac {u_0 | u_1 | u_2 | \dots | u_n}
+= \contfrac*{u_0 | u_1 | u_2 | \dots | u_n}$
+\end{latexex-flat}
+
+
+% ---------------------- %
+
+
+\subsubsection{Fractions continuées généralisées}
+
+\newparaexample*{}
+
+Voici comment écrire une fraction continuée généralisée.
+
+\begin{latexex-flat}
+ $\displaystyle
+  \contfracgene {a | b | c | d | e | f | \dots | y | z}
+= \contfracgene*{a | b | c | d | e | f | \dots | y | z}$
+\end{latexex-flat}
+
+
+% ---------------------- %
+
+
+\subsubsection{Comme une fraction continuée isolée}
+
+\newparaexample*{}
+
+La raison d'être de la macro ci-dessous vient juste de son usage en interne.
+
+\begin{latexex}
+$\singlecontfrac{a}{b}$
+pour les fous\dots :-)
+\end{latexex}
+
+
+% ---------------------- %
+
+
+\subsubsection{\texorpdfstring{L'opérateur $\contfracope$}%
+                               {L'opérateur K}}
+
+\newparaexample{}
+
+La notation suivante est proche de celle qu'utilisait Carl Friedrich Gauss.
+
+\begin{latexex-flat}
+ $\displaystyle
+  \contfracope_{k=1}^{n} (b_k:c_k)
+= \cfrac{b_1}%
+        {\contfracgene{c_1 | b_2 | c_2 | b_3 | \dots | b_n | c_n}}$
+\end{latexex-flat}
+
+
+\begin{remark}
+    La lettre $\contfracope $vient de "kettenbruch" qui signifie "fraction continuée" en allemand.
+\end{remark}
+
+
+% ---------------------- %
+
+
+\newparaexample{}
+
+\begin{latexex-flat}
+ $\displaystyle
+  u_0 + \contfracope_{k=1}^{n} (1:u_k)
+= \contfrac{u_0 | u_1 | u_2 | \dots | u_n}$
+\end{latexex-flat}
+
+
+% ---------------------- %
+\newpage
+
+\section{Historique}
+
+Nous ne donnons ici qu'un très bref historique récent
+\footnote{
+	On ne va pas au-delà de un an depuis la dernière version.
+}
+de \verb+tnsarith+ à destination de l'utilisateur principalement.
+Tous les changements sont disponibles uniquement en anglais dans le dossier \verb+change-log+ : voir le code source de \verb+tnsarith+ sur \verb+github+.
+
+\begin{description}
+% Changes shown - START
+
+    \medskip
+    \item[2020-07-10] Première version \verb+0.0.0-beta+.
+% ------------------------ %
+
+% Changes shown - END 
+\end{description}
+
+
+\newpage
+\section{Toutes les fiches techniques} \label{techincal-ids}
+
+
+\subsection{Arithmétique}
+
+\subsubsection{Arithmétique -- Opérateurs de base}
+
+\IDmacro*{divides}{0}
+
+\IDmacro*{ndivides}{0}
+
+\extraspace
+
+\IDmacro*{nequiv}{0}
+
+\extraspace
+
+\IDmacro*{modulo}{0}
+\subsubsection{Fractions continuées standard}
+
+\IDmacro*{contfrac}{1}
+
+\IDmacro*{contfrac*}{1}
+
+\IDarg{} tous les éléments de la fraction continuée séparés par des \verb+|+.
+
+
+% ---------------------- %
+
+
+
+\subsubsection{Fractions continuées généralisées}
+
+\IDmacro*{contfracgene}{1}
+
+\IDmacro*{contfracgene*}{1}
+
+\IDarg{} tous les éléments de la fraction continuée généralisée séparés par des \verb+|+.
+
+
+% ---------------------- %
+
+
+
+\subsubsection{Comme une fraction continuée isolée}
+
+\IDmacro*{singlecontfrac}{2}
+
+\IDarg{1} le pseudo numérateur.
+
+\IDarg{2} le pseudo dénominateur.
+
+
+% ---------------------- %
+
+
+
+\subsubsection{\texorpdfstring{Fractions continuées -- L'opérateur $\contfracope$}%
+                          {Fractions continuées -- L'opérateur K}}
+
+La macro suivante sans argument a un comportement spécifique vis à vis des mises en index et en exposant. 
+
+
+\separation
+
+
+\IDmacro*{contfracope}{0}
+
+
+\end{document}
