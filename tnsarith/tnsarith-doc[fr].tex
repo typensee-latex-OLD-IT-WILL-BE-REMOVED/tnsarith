@@ -170,10 +170,10 @@
 \title{  %
 	Le package \texttt{tnsarith}\\%
 	{\footnotesize Code source disponible sur \url{https://github.com/typensee-latex/tnsarith.git}.}\\%
-{\footnotesize Version \texttt{0.0.0-beta} développée et testée sur \macosxname{}.}%
+{\footnotesize Version \texttt{0.1.0-beta} développée et testée sur \macosxname{}.}%
 }
 \author{Christophe BAL}
-\date{2020-07-10}
+\date{2020-07-12}
 
 \maketitle
 
@@ -211,11 +211,41 @@ $a \nequiv b \modulo p
 
 
 % ---------------------- %
+\section{Fonctions nommées spéciales}
+
+\subsection{Sans paramètre}
+
+%\newparaexample*{}
+
+Deux fonctions nommées \macro{pgcd} et \macro{ppcm} utiles au francophone ont été ajoutées ainsi que la fonction \macro{lcm} pour les anglophones car cette dernière n'est pas disponible par défaut.
+La liste complète des fonctions nommées est donnée ci-dessous dans la section \ref{tnsarith-all-named-functions}.
+
+\begin{latexex}
+$\pgcd x = \gcd x$ et $\ppcm x = \lcm x$
+\end{latexex}
+
+
+% ---------------------- %
+
+
+\subsection{Toutes les fonctions nommées en plus} \label{tnsarith-all-named-functions}
+
+\vspace{-1em}
+
+\begin{multicols}{2}
+% Table of all - START
+    \verb+pgcd+ : $\pgcd\dots$
+
+    \verb+ppcm+ : $\ppcm\dots$
+
+    \verb+lcm+ : $\lcm\dots$
+% Table of all - END
+\end{multicols}
 \section{Fractions continuées}
 
 \subsection{Fractions continuées standard}
 
-\newparaexample*{}
+%\newparaexample*{}
 
 Dans l'exemple suivant, la notation en ligne semble être due à Alfred Pringsheim. La notation à gauche utilise toujours le maximum d'espace pour améliorer la lisibilité.
 
@@ -230,7 +260,7 @@ Dans l'exemple suivant, la notation en ligne semble être due à Alfred Pringshe
 
 \subsection{Fractions continuées généralisées}
 
-\newparaexample*{}
+%\newparaexample*{}
 
 Voici comment écrire une fraction continuée généralisée.
 
@@ -246,7 +276,7 @@ Voici comment écrire une fraction continuée généralisée.
 
 \subsection{Comme une fraction continuée isolée}
 
-\newparaexample*{}
+%\newparaexample*{}
 
 La raison d'être de la macro ci-dessous vient juste de son usage en interne.
 
@@ -307,6 +337,16 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 % Changes shown - START
 
     \medskip
+    \item[2020-07-12] Nouvelle version mineure \verb+0.1.0-beta+. 
+        
+    \begin{itemize}[itemsep=.5em]
+        \item \topic*{Fonctions nommées} ajout de \macro{pgcd}, \macro{ppcm} et \macro{lcm}.
+    \end{itemize}
+    
+    \separation
+% ------------------------ %
+
+    \medskip
     \item[2020-07-10] Première version \verb+0.0.0-beta+.
 % ------------------------ %
 
@@ -333,6 +373,42 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 \extraspace
 
 \IDmacro*{modulo}{0}
+\subsection{Fonctions nommées spéciales}
+
+\subsubsection{Fonctions nommées sans paramètre}
+
+% List of functions without parameter - START
+
+\foreach \k in {pgcd, ppcm}{
+
+    \IDmacro*{\k}{0}
+}
+                
+\separation
+
+\foreach \k in {lcm}{
+
+    \IDmacro*{\k}{0}
+}
+
+% List of functions without parameter - END
+
+
+% ---------------------- %
+
+
+%\subsection{Avec un paramètre}
+%
+%\subsection{Fiches techniques}
+%
+%\subsubsection{Fonctions nommées avec un paramètre}
+%
+% List of functions with parameters - START
+
+% List of functions with parameters - END
+
+
+% ---------------------- %
 \subsection{Fractions continuées}
 
 \subsubsection{Fractions continuées standard}

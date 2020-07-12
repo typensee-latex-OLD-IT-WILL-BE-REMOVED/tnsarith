@@ -42,6 +42,11 @@ MYFRAME = lambda x: withframe(
 
 
 def startingtech(text):
+    text = text.strip()
+
+    if text.startswith("%"):
+        return False
+
     return "{Fiches techniques}" in text \
         or "{Fiche technique}" in text
 

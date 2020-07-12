@@ -1,4 +1,15 @@
 ==========
+2020-07-12
+==========
+
+**New minor version version::``0.1.0-beta`` of ¨tnsarith:** here are the changes.
+
+    1) the french named functions `ppcm` and `pgcd` have been added and also `lcm` which is not proposed by ¨latex.
+
+    1) All the labels use the prefix ``tnsarith`` to avoid conflicts when building ¨tnsmath.
+
+
+==========
 2020-07-10
 ==========
 

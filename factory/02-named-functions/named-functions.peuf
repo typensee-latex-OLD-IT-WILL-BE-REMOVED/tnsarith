@@ -1,0 +1,16 @@
+no-parameter::
+// Specifications :
+// latex command = name for humans
+//
+// If name for humans is empty then the name is the same
+// as the latex name of the command.
+    pgcd =
+    ppcm =
+
+    lcm =
+
+
+parameter::
+// Specifications :
+// nb parameter ; LaTeX code
+//    expb = 1 ; \exp_{#1} ; la base de l'exponentielle
