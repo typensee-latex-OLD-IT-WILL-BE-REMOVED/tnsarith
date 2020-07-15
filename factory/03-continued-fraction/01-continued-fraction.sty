@@ -37,66 +37,66 @@
 }
 
 % Standard continued fraction
-\newcommand\contfrac{\@ifstar{\@contfrac@star}{\@contfrac@no@star}}
+\newcommand\contfrac{\@ifstar{\tnsarith@contfrac@star}{\tnsarith@contfrac@no@star}}
 
-\newcommand\@contfrac@no@star[1]{%
-    \@contfrac@no@star@recu@#1|\@nil%
+\newcommand\tnsarith@contfrac@no@star[1]{%
+    \tnsarith@contfrac@no@star@recu@#1|\@nil%
 }
-\def\@contfrac@no@star@recu@#1|#2\@nil{%
+\def\tnsarith@contfrac@no@star@recu@#1|#2\@nil{%
     \@ifmtarg{#2}{%
         #1%
     }{%
-        #1 + \cfrac{1}{\@contfrac@no@star@recu@#2\@nil}%
+        #1 + \cfrac{1}{\tnsarith@contfrac@no@star@recu@#2\@nil}%
     }%
 }
 
-\newcommand\@contfrac@star[1]{%
-    \@contfrac@star@before@#1|\@nil%
+\newcommand\tnsarith@contfrac@star[1]{%
+    \tnsarith@contfrac@star@before@#1|\@nil%
 }
-\def\@contfrac@star@before@#1|#2\@nil{%
+\def\tnsarith@contfrac@star@before@#1|#2\@nil{%
     \@ifmtarg{#2}{%
         #1%
     }{%
-        #1 \@contfrac@star@recu@#2\@nil%
+        #1 \tnsarith@contfrac@star@recu@#2\@nil%
     }%
 }
-\def\@contfrac@star@recu@#1|#2\@nil{%
+\def\tnsarith@contfrac@star@recu@#1|#2\@nil{%
     \@ifmtarg{#2}{%
         + \singlecontfrac{1}{#1}%
     }{%
-        + \singlecontfrac{1}{#1} \@contfrac@star@recu@#2\@nil%
+        + \singlecontfrac{1}{#1} \tnsarith@contfrac@star@recu@#2\@nil%
     }%
 }
 
 % Generalized continued fraction
-\newcommand\contfracgene{\@ifstar{\@contfracgene@star}{\@contfracgene@no@star}}
+\newcommand\contfracgene{\@ifstar{\tnsarith@contfracgene@star}{\tnsarith@contfracgene@no@star}}
 
-\newcommand\@contfracgene@no@star[1]{%
-    \@contfracgene@no@star@recu@#1||\@nil%
+\newcommand\tnsarith@contfracgene@no@star[1]{%
+    \tnsarith@contfracgene@no@star@recu@#1||\@nil%
 }
-\def\@contfracgene@no@star@recu@#1|#2|#3\@nil{%
+\def\tnsarith@contfracgene@no@star@recu@#1|#2|#3\@nil{%
     \@ifmtarg{#2}{%
         #1%
     }{%
-        #1 + \cfrac{#2}{\@contfracgene@no@star@recu@#3\@nil}%
+        #1 + \cfrac{#2}{\tnsarith@contfracgene@no@star@recu@#3\@nil}%
     }%
 }
 
 
-\newcommand\@contfracgene@star[1]{%
-    \@contfracgene@star@before@#1|\@nil%
+\newcommand\tnsarith@contfracgene@star[1]{%
+    \tnsarith@contfracgene@star@before@#1|\@nil%
 }
-\def\@contfracgene@star@before@#1|#2\@nil{%
+\def\tnsarith@contfracgene@star@before@#1|#2\@nil{%
     \@ifmtarg{#2}{%
         #1%
     }{%
-        #1 \@contfracgene@star@recu@#2\@nil%
+        #1 \tnsarith@contfracgene@star@recu@#2\@nil%
     }%
 }
-\def\@contfracgene@star@recu@#1|#2|#3\@nil{%
+\def\tnsarith@contfracgene@star@recu@#1|#2|#3\@nil{%
     \@ifmtarg{#3}{%
         + \singlecontfrac{#1}{#2}%
     }{%
-        + \singlecontfrac{#1}{#2} \@contfracgene@star@recu@#3\@nil%
+        + \singlecontfrac{#1}{#2} \tnsarith@contfracgene@star@recu@#3\@nil%
     }%
 }
