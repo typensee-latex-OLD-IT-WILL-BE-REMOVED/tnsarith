@@ -1,0 +1,9 @@
+$10 \divides 150$ au lieu de
+$10 | 150$
+
+$10 \ndivides 154$ au lieu de
+$10 \not| 154$
+
+$a \nequiv b \modulo p
+ \iff
+ p \ndivides (a - b)$.
