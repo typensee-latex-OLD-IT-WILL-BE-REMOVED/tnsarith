@@ -1,4 +1,11 @@
 ==========
+2020-07-17
+==========
+
+**Documentation updated :** the macros `\NN`, `\ZZ` and `\QQ` of the package ¨tnssets have been indicated.
+
+
+==========
 2020-07-12
 ==========
 
