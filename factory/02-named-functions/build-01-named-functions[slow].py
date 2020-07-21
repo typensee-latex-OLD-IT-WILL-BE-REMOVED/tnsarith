@@ -109,32 +109,6 @@ macro_defs = macro_defs.strip()
 temp_sty = f"{text_start}\n\n{macro_defs}\n\n{text_end}"
 
 
-# ------------------------------ #
-# -- UPDATING SUMMARING TABLE -- #
-# ------------------------------ #
-
-text_start, _, text_end = between(
-    text = temp_tex,
-    seps = [
-        "% Table of all - START",
-        "% Table of all - END"
-    ],
-    keepseps = True
-)
-
-tabletex = [
-    f"    \\verb+{name}+ : $\\{name}\dots$"
-    for name in list(functions['no-parameter'])
-] + [
-    f"    \\verb+{name}{{p}}+ : $\\{name}{{p}}\dots$"
-    for name in list(functions['parameter'])
-]
-
-tabletex = '\n\n'.join(tabletex)
-
-temp_tex = f"{text_start}\n{tabletex}\n{text_end}"
-
-
 # ----------------------------------------------- #
 # -- UPDATING LISTS FOR THE DOC - NO PARAMETER -- #
 # ----------------------------------------------- #
@@ -190,53 +164,6 @@ for onemacro in list(functions['no-parameter'].keys()) + ["ZZZZ-unsed-ZZZZ"]:
 if docinfos:
 # Let's remove the lase separation.
     docinfos = "\n".join(docinfos[:-1])
-    docinfos = docinfos.strip()
-    docinfos = f"\n{docinfos}\n"
-
-else:
-    docinfos = ""
-
-temp_tex = f"{text_start}\n{docinfos}\n{text_end}"
-
-
-
-# --------------------------------------------- #
-# -- UPDATING LISTS FOR THE DOC - PARAMETERS -- #
-# --------------------------------------------- #
-
-text_start, _, text_end = between(
-    text = temp_tex,
-    seps = [
-        "% List of functions with parameters - START",
-        "% List of functions with parameters - END"
-    ],
-    keepseps = True
-)
-
-docinfos = []
-
-for name, infos in functions['parameter'].items():
-    nbparam = int(infos['nbparam'])
-
-    docinfos += [
-        "\\separation",
-        f"\\IDmacro*{{{name}}}{{{nbparam}}}"
-    ]
-
-    desc = infos["desc"]
-
-    if len(desc) == 1:
-        docinfos.append(f"\\IDarg{{}} {desc[0]}")
-
-    else:
-        for i, d in enumerate(desc, 1):
-            docinfos.append(f"\\IDarg{{{i}}} {d}")
-
-
-if docinfos:
-    docinfos.append("")
-    docinfos = [""] + docinfos[1:]
-    docinfos = "\n\n".join(docinfos)
     docinfos = docinfos.strip()
     docinfos = f"\n{docinfos}\n"
 

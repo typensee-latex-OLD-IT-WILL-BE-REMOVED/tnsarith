@@ -49,6 +49,16 @@
 	listing side text
 }
 
+\newtcbinputlisting{\inputlatexex}[2][]{%
+	listing file={#2},%
+	sharp corners,%
+	left=1mm, right=1mm,%
+	bottom=1mm, top=1mm,%
+	colupper=red!75!blue,%
+	listing side text
+}
+
+
 \newtcblisting{latexex-flat}{%
 	sharp corners,%
 	left=1mm, right=1mm,%
@@ -56,12 +66,56 @@
 	colupper=red!75!blue,%
 }
 
+\newtcbinputlisting{\inputlatexexflat}[2][]{%
+	listing file={#2},%
+	sharp corners,%
+	left=1mm, right=1mm,%
+	bottom=1mm, top=1mm,%
+	colupper=red!75!blue,%
+}
+
+
 \newtcblisting{latexex-alone}{%
 	sharp corners,%
 	left=1mm, right=1mm,%
 	bottom=1mm, top=1mm,%
 	colupper=red!75!blue,%
 	listing only
+}
+
+\newtcbinputlisting{\inputlatexexalone}[2][]{%
+	listing file={#2},%
+	sharp corners,%
+	left=1mm, right=1mm,%
+	bottom=1mm, top=1mm,%
+	colupper=red!75!blue,%
+	listing only
+}
+
+
+\newcommand\inputlatexexcodeafter[1]{%
+	\begin{center}
+		\input{#1}
+	\end{center}
+
+	\vspace{-.5em}
+	
+	Le rendu précédent a été obtenu via le code suivant.
+	
+	\inputlatexexalone{#1}
+}
+
+
+\newcommand\inputlatexexcodebefore[1]{%
+	\inputlatexexalone{#1}
+	\vspace{-.75em}
+	\begin{center}
+		\textit{\footnotesize Rendu du code précédent}
+		
+		\medskip
+		
+		\input{#1}
+	\end{center}
 }
 
 
@@ -218,8 +272,6 @@ $a \nequiv b \modulo p
 % ---------------------- %
 \section{Fonctions nommées spéciales}
 
-\subsection{Sans paramètre}
-
 %\newparaexample*{}
 
 Deux fonctions nommées \macro{pgcd} et \macro{ppcm} utiles au francophone ont été ajoutées ainsi que la fonction \macro{lcm} pour les anglophones car cette dernière n'est pas disponible par défaut.
@@ -231,21 +283,6 @@ $\pgcd x = \gcd x$ et $\ppcm x = \lcm x$
 
 
 % ---------------------- %
-
-
-\subsection{Toutes les fonctions nommées en plus} \label{tnsarith-all-named-functions}
-
-\vspace{-1em}
-
-\begin{multicols}{2}
-% Table of all - START
-    \verb+pgcd+ : $\pgcd\dots$
-
-    \verb+ppcm+ : $\ppcm\dots$
-
-    \verb+lcm+ : $\lcm\dots$
-% Table of all - END
-\end{multicols}
 \section{Fractions continuées}
 
 \subsection{Fractions continuées standard}
@@ -294,8 +331,8 @@ pour les fous\dots :-)
 % ---------------------- %
 
 
-\subsection{\texorpdfstring{L'opérateur $\contfracope$}%
-                               {L'opérateur K}}
+\subsection{\texorpdfstring{L'opérateur $\contfracope$}%                           {L'opérateur K}}
+                           {L'opérateur K}}
 
 \newparaexample{}
 
@@ -362,11 +399,10 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 \newpage
 \section{Toutes les fiches techniques} \label{techincal-ids}
 
-\subsection{Introduction}
-\subsection{Ensembles classiques}
+
+
 \subsection{Opérateurs de base}
 
-\subsubsection{Arithmétique -- Opérateurs de base}
 
 \IDmacro*{divides}{0}
 
@@ -381,7 +417,6 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 \IDmacro*{modulo}{0}
 \subsection{Fonctions nommées spéciales}
 
-\subsubsection{Fonctions nommées sans paramètre}
 
 % List of functions without parameter - START
 
@@ -398,26 +433,10 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 }
 
 % List of functions without parameter - END
-
-
-% ---------------------- %
-
-
-%\subsection{Avec un paramètre}
-%
-%\subsection{Fiches techniques}
-%
-%\subsubsection{Fonctions nommées avec un paramètre}
-%
-% List of functions with parameters - START
-
-% List of functions with parameters - END
-
-
-% ---------------------- %
 \subsection{Fractions continuées}
 
 \subsubsection{Fractions continuées standard}
+
 
 \IDmacro*{contfrac}{1}
 
@@ -429,8 +448,8 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 % ---------------------- %
 
 
-
 \subsubsection{Fractions continuées généralisées}
+
 
 \IDmacro*{contfracgene}{1}
 
@@ -442,8 +461,8 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 % ---------------------- %
 
 
-
 \subsubsection{Comme une fraction continuée isolée}
+
 
 \IDmacro*{singlecontfrac}{2}
 
@@ -455,9 +474,9 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 % ---------------------- %
 
 
+\subsubsection{\texorpdfstring{L'opérateur $\contfracope$}%
+                           {L'opérateur K}}
 
-\subsubsection{\texorpdfstring{Fractions continuées -- L'opérateur $\contfracope$}%
-                          {Fractions continuées -- L'opérateur K}}
 
 La macro suivante sans argument a un comportement spécifique vis à vis des mises en index et en exposant. 
 
@@ -466,6 +485,6 @@ La macro suivante sans argument a un comportement spécifique vis à vis des mis
 
 
 \IDmacro*{contfracope}{0}
-\newpage
+
 
 \end{document}
