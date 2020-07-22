@@ -38,6 +38,12 @@
 \usepackage{cbdevtool}
 
 
+% Sections numbering
+
+\renewcommand\thesection{\arabic{section}.}
+\renewcommand\thesubsection{\alph{subsection}.}
+\renewcommand\thesubsubsection{\roman{subsubsection}.}
+
 
 % MISC
 
@@ -401,7 +407,14 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 
 
 
+
+
+
+
+
+
 \subsection{Opérateurs de base}
+
 
 
 \IDmacro*{divides}{0}
@@ -415,7 +428,10 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 \extraspace
 
 \IDmacro*{modulo}{0}
+
+
 \subsection{Fonctions nommées spéciales}
+
 
 
 % List of functions without parameter - START
@@ -433,9 +449,12 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 }
 
 % List of functions without parameter - END
+
+
 \subsection{Fractions continuées}
 
 \subsubsection{Fractions continuées standard}
+
 
 
 \IDmacro*{contfrac}{1}
@@ -451,6 +470,7 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 \subsubsection{Fractions continuées généralisées}
 
 
+
 \IDmacro*{contfracgene}{1}
 
 \IDmacro*{contfracgene*}{1}
@@ -462,6 +482,7 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 
 
 \subsubsection{Comme une fraction continuée isolée}
+
 
 
 \IDmacro*{singlecontfrac}{2}
@@ -478,6 +499,7 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
                            {L'opérateur K}}
 
 
+
 La macro suivante sans argument a un comportement spécifique vis à vis des mises en index et en exposant. 
 
 
@@ -485,6 +507,8 @@ La macro suivante sans argument a un comportement spécifique vis à vis des mis
 
 
 \IDmacro*{contfracope}{0}
+
+
 
 
 \end{document}
