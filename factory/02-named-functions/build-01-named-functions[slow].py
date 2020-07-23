@@ -134,7 +134,7 @@ for onemacro in list(functions['no-parameter'].keys()) + ["ZZZZ-unsed-ZZZZ"]:
             lastmacros = ", ".join(lastmacros)
 
             if lastfirst == "f":
-                extra ="  où \\quad \\mwhyprefix{{f}}{{rench}}"
+                extra = "\\hfill \\mwhyprefix{{f}}{{rench}}"
 
             else:
                 extra = ""
@@ -143,7 +143,7 @@ for onemacro in list(functions['no-parameter'].keys()) + ["ZZZZ-unsed-ZZZZ"]:
                 f"""
 \\foreach \\k in {{{lastmacros}}}{{
 
-    \\IDmacro*{{\k}}{{0}}{extra}
+    \\IDope{{\k}}{extra}
 }}
                 """,
                 "\\separation"

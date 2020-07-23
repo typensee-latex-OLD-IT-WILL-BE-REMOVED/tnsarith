@@ -12,6 +12,8 @@
 \usepackage[top=2cm, bottom=2cm, left=1.5cm, right=1.5cm]{geometry}
 \usepackage{enumitem}
 
+\usepackage{pgffor}
+
 \usepackage{multicol}
 
 \usepackage{makecell}
@@ -35,7 +37,7 @@
 
 \usepackage{ifthen}
 
-\usepackage{cbdevtool}
+\usepackage{macroenvsign}
 
 
 % Sections numbering
@@ -418,17 +420,17 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 
 
 
-\IDmacro*{divides}{0}
+\IDope{divides}
 
-\IDmacro*{ndivides}{0}
-
-\extraspace
-
-\IDmacro*{nequiv}{0}
+\IDope{ndivides}
 
 \extraspace
 
-\IDmacro*{modulo}{0}
+\IDope{nequiv}
+
+\extraspace
+
+\IDope{modulo}
 
 
 \subsection{Fonctions nommées spéciales}
@@ -439,14 +441,14 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 
 \foreach \k in {pgcd, ppcm}{
 
-    \IDmacro*{\k}{0}
+    \IDope{\k}
 }
                 
 \separation
 
 \foreach \k in {lcm}{
 
-    \IDmacro*{\k}{0}
+    \IDope{\k}
 }
 
 % List of functions without parameter - END
@@ -507,7 +509,7 @@ La macro suivante sans argument a un comportement spécifique vis à vis des mis
 \separation
 
 
-\IDmacro*{contfracope}{0}
+\IDope{contfracope}
 
 
 
