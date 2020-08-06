@@ -42,9 +42,11 @@
 
 % Sections numbering
 
-\renewcommand\thesection{\arabic{section}.}
-\renewcommand\thesubsection{\alph{subsection}.}
+%\renewcommand\thechapter{\Alph{chapter}.}
+\renewcommand\thesection{\Roman{section}.}
+\renewcommand\thesubsection{\arabic{subsection}.}
 \renewcommand\thesubsubsection{\roman{subsubsection}.}
+
 
 
 % MISC
@@ -303,7 +305,6 @@ $a \nequiv b \modulo p
 %\newparaexample*{}
 
 Deux fonctions nommées \macro{pgcd} et \macro{ppcm} utiles au francophone ont été ajoutées ainsi que la fonction \macro{lcm} pour les anglophones car cette dernière n'est pas disponible par défaut.
-La liste complète des fonctions nommées est donnée ci-dessous dans la section \ref{tnsarith-all-named-functions}.
 
 \begin{latexex}
 $\pgcd x = \gcd x$ et $\ppcm x = \lcm x$
