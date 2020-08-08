@@ -11,7 +11,9 @@
 %    * http://tex.stackexchange.com/questions/68190/continued-fraction-in-inline-equations/68196#68196
 %    * http://tex.stackexchange.com/questions/23432/how-to-create-my-own-math-operator-with-limits
 
-% Operator
+
+% -- Operator -- %
+
 \newcommand\contfracope{%
     \operatornamewithlimits{%
         \mathchoice{% * Display style
@@ -26,7 +28,10 @@
     }
 }
 
-% Single continued fraction (useful ?)
+
+
+% -- Single continued fraction (useful ?) -- %
+
 \newcommand\singlecontfrac[2]{%
     \begin{array}{@{}c@{}}%
         \multicolumn{1}{c|}{#1}%
@@ -36,67 +41,80 @@
     \end{array}%
 }
 
-% Standard continued fraction
+
+
+% -- Standard continued fraction -- %
+
 \newcommand\contfrac{\@ifstar{\tnsarith@contfrac@star}{\tnsarith@contfrac@no@star}}
 
 \newcommand\tnsarith@contfrac@no@star[1]{%
     \tnsarith@contfrac@no@star@recu@#1|\@nil%
 }
+
 \def\tnsarith@contfrac@no@star@recu@#1|#2\@nil{%
-    \@ifmtarg{#2}{%
+    \if\relax\detokenize{#2}\relax%
         #1%
-    }{%
+    \else%
         #1 + \cfrac{1}{\tnsarith@contfrac@no@star@recu@#2\@nil}%
-    }%
+    \fi%
 }
+
 
 \newcommand\tnsarith@contfrac@star[1]{%
     \tnsarith@contfrac@star@before@#1|\@nil%
 }
+
 \def\tnsarith@contfrac@star@before@#1|#2\@nil{%
-    \@ifmtarg{#2}{%
+    \if\relax\detokenize{#2}\relax%
         #1%
-    }{%
+    \else%
         #1 \tnsarith@contfrac@star@recu@#2\@nil%
-    }%
-}
-\def\tnsarith@contfrac@star@recu@#1|#2\@nil{%
-    \@ifmtarg{#2}{%
-        + \singlecontfrac{1}{#1}%
-    }{%
-        + \singlecontfrac{1}{#1} \tnsarith@contfrac@star@recu@#2\@nil%
-    }%
+    \fi%
 }
 
-% Generalized continued fraction
+\def\tnsarith@contfrac@star@recu@#1|#2\@nil{%
+    \if\relax\detokenize{#2}\relax%
+        + \singlecontfrac{1}{#1}%
+    \else%
+        + \singlecontfrac{1}{#1} \tnsarith@contfrac@star@recu@#2\@nil%
+    \fi%
+}
+
+
+
+% -- Generalized continued fraction -- %
+
 \newcommand\contfracgene{\@ifstar{\tnsarith@contfracgene@star}{\tnsarith@contfracgene@no@star}}
 
 \newcommand\tnsarith@contfracgene@no@star[1]{%
     \tnsarith@contfracgene@no@star@recu@#1||\@nil%
 }
+
 \def\tnsarith@contfracgene@no@star@recu@#1|#2|#3\@nil{%
-    \@ifmtarg{#2}{%
+    \if\relax\detokenize{#2}\relax%
         #1%
-    }{%
+    \else%
         #1 + \cfrac{#2}{\tnsarith@contfracgene@no@star@recu@#3\@nil}%
-    }%
+    \fi%
 }
 
 
 \newcommand\tnsarith@contfracgene@star[1]{%
     \tnsarith@contfracgene@star@before@#1|\@nil%
 }
+
 \def\tnsarith@contfracgene@star@before@#1|#2\@nil{%
-    \@ifmtarg{#2}{%
+    \if\relax\detokenize{#2}\relax%
         #1%
-    }{%
+    \else%
         #1 \tnsarith@contfracgene@star@recu@#2\@nil%
-    }%
+    \fi%
 }
+
 \def\tnsarith@contfracgene@star@recu@#1|#2|#3\@nil{%
-    \@ifmtarg{#3}{%
+    \if\relax\detokenize{#3}\relax%
         + \singlecontfrac{#1}{#2}%
-    }{%
+    \else%
         + \singlecontfrac{#1}{#2} \tnsarith@contfracgene@star@recu@#3\@nil%
-    }%
+    \fi%
 }
