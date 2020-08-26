@@ -1,4 +1,17 @@
 ==========
+2020-08-26
+==========
+
+**New minor version version::``0.2.0-beta`` of ¨tnsarith:** see the new features below.
+
+
+**Continued fractions:** the new macros ``scontfrac``, ``scontfrac*``, ``scontfracgene`` and ``scontfracgene*`` are to obtain only the fractional part.
+
+
+**Backstage machinery:** the macro ``\tnsarith@short@contfrac@star`` uses ``\tns@multi@apply@each``.
+
+
+==========
 2020-08-09
 ==========
 

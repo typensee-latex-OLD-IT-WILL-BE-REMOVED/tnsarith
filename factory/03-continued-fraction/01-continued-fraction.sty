@@ -3,6 +3,8 @@
 \RequirePackage{mathtools}
 \RequirePackage{ifmtarg}
 
+\RequirePackage{tnscom}
+
 
 % == DEFINITIONS == %
 
@@ -12,7 +14,7 @@
 %    * http://tex.stackexchange.com/questions/23432/how-to-create-my-own-math-operator-with-limits
 
 
-% -- Operator -- %
+% -- OPERATOR -- %
 
 \newcommand\contfracope{%
     \operatornamewithlimits{%
@@ -30,7 +32,7 @@
 
 
 
-% -- Single continued fraction (useful ?) -- %
+% -- SINGLE CONTINUED FRACTION (USEFUL ?) -- %
 
 \newcommand\singlecontfrac[2]{%
     \begin{array}{@{}c@{}}%
@@ -43,78 +45,151 @@
 
 
 
-% -- Standard continued fraction -- %
+% -- STANDARD CONTINUED FRACTION - LONG -- %
 
 \newcommand\contfrac{\@ifstar{\tnsarith@contfrac@star}{\tnsarith@contfrac@no@star}}
 
+
+% Display style
+
 \newcommand\tnsarith@contfrac@no@star[1]{%
-    \tnsarith@contfrac@no@star@recu@#1|\@nil%
+    \tnsarith@contfrac@no@star@recu@{\cfrac}#1|\@nil%
 }
 
-\def\tnsarith@contfrac@no@star@recu@#1|#2\@nil{%
-    \if\relax\detokenize{#2}\relax%
-        #1%
+\def\tnsarith@contfrac@no@star@recu@#1#2|#3\@nil{%
+    \if\relax\detokenize{#3}\relax%
+        #2%
     \else%
-        #1 + \cfrac{1}{\tnsarith@contfrac@no@star@recu@#2\@nil}%
+        #2 + #1{1}{\tnsarith@contfrac@no@star@recu@#1#3\@nil}%
     \fi%
 }
 
+
+% Inline style
+
+\newcommand\tnsarith@single@contfrac@star@part[2]{%
+    \ifnum#1=1
+        #2%
+    \else%
+        + \singlecontfrac{1}{#2}%
+    \fi%
+}
 
 \newcommand\tnsarith@contfrac@star[1]{%
-    \tnsarith@contfrac@star@before@#1|\@nil%
+    \tns@multi@apply@each{\tnsarith@single@contfrac@star@part}{#1}
 }
 
-\def\tnsarith@contfrac@star@before@#1|#2\@nil{%
-    \if\relax\detokenize{#2}\relax%
-        #1%
-    \else%
-        #1 \tnsarith@contfrac@star@recu@#2\@nil%
+
+
+% -- STANDARD CONTINUED FRACTION - SHORT -- %
+
+\newcommand\scontfrac{\@ifstar{\tnsarith@short@contfrac@star}{\tnsarith@short@contfrac@no@star}}
+
+
+% Display style
+
+\newcommand\tnsarith@short@contfrac@no@star[1]{%
+    \tnsarith@short@contfrac@no@star@recu@{\cfrac}#1|\@nil%
+}
+
+\def\tnsarith@short@contfrac@no@star@recu@#1#2|#3\@nil{%
+	#1{1}{%
+		\if\relax\detokenize{#3}\relax%
+            #2%
+        \else%
+            #2 + \tnsarith@short@contfrac@no@star@recu@#1#3\@nil%
+        \fi%
+	}%
+}
+
+
+% Inline style
+
+\newcommand\tnsarith@single@short@contfrac@star@part[2]{%
+    \ifnum#1=1\else%
+        +%
     \fi%
+    \singlecontfrac{1}{#2}%
 }
 
-\def\tnsarith@contfrac@star@recu@#1|#2\@nil{%
-    \if\relax\detokenize{#2}\relax%
-        + \singlecontfrac{1}{#1}%
-    \else%
-        + \singlecontfrac{1}{#1} \tnsarith@contfrac@star@recu@#2\@nil%
-    \fi%
+\newcommand\tnsarith@short@contfrac@star[1]{%
+    \tns@multi@apply@each{\tnsarith@single@short@contfrac@star@part}{#1}
 }
 
 
 
-% -- Generalized continued fraction -- %
+% -- GENERALIZED CONTINUED FRACTION - LONG -- %
 
 \newcommand\contfracgene{\@ifstar{\tnsarith@contfracgene@star}{\tnsarith@contfracgene@no@star}}
+
+
+% Display style
 
 \newcommand\tnsarith@contfracgene@no@star[1]{%
     \tnsarith@contfracgene@no@star@recu@#1||\@nil%
 }
 
 \def\tnsarith@contfracgene@no@star@recu@#1|#2|#3\@nil{%
-    \if\relax\detokenize{#2}\relax%
+    \@ifmtarg{#2}{%
         #1%
-    \else%
+    }{%
         #1 + \cfrac{#2}{\tnsarith@contfracgene@no@star@recu@#3\@nil}%
-    \fi%
+    }%
 }
 
+
+% Inline style
 
 \newcommand\tnsarith@contfracgene@star[1]{%
     \tnsarith@contfracgene@star@before@#1|\@nil%
 }
-
 \def\tnsarith@contfracgene@star@before@#1|#2\@nil{%
-    \if\relax\detokenize{#2}\relax%
+    \@ifmtarg{#2}{%
         #1%
-    \else%
+    }{%
         #1 \tnsarith@contfracgene@star@recu@#2\@nil%
-    \fi%
+    }%
+}
+\def\tnsarith@contfracgene@star@recu@#1|#2|#3\@nil{%
+    \@ifmtarg{#3}{%
+        + \singlecontfrac{#1}{#2}%
+    }{%
+        + \singlecontfrac{#1}{#2} \tnsarith@contfracgene@star@recu@#3\@nil%
+    }%
 }
 
-\def\tnsarith@contfracgene@star@recu@#1|#2|#3\@nil{%
-    \if\relax\detokenize{#3}\relax%
-        + \singlecontfrac{#1}{#2}%
-    \else%
-        + \singlecontfrac{#1}{#2} \tnsarith@contfracgene@star@recu@#3\@nil%
+
+
+% -- GENERALIZED CONTINUED FRACTION - SHORT -- %
+
+\newcommand\scontfracgene{\@ifstar{\tnsarith@short@contfracgene@star}{\tnsarith@short@contfracgene@no@star}}
+
+
+% Display style
+
+\newcommand\tnsarith@short@contfracgene@no@star[1]{%
+    \tnsarith@short@contfracgene@no@star@recu@#1|\@nil%
+}
+
+\def\tnsarith@short@contfracgene@no@star@recu@#1|#2|#3\@nil{%
+	\cfrac{#1}{%
+		#2
+		\if\relax\detokenize{#3}\relax\else%
+		+ \tnsarith@short@contfracgene@no@star@recu@#3\@nil%
+		\fi%
+	}
+}
+
+
+% Inline style
+
+\newcommand\tnsarith@short@contfracgene@star[1]{%
+    \tnsarith@short@contfracgene@star@recu@#1|\@nil%
+}
+
+\def\tnsarith@short@contfracgene@star@recu@#1|#2|#3\@nil{%
+    \singlecontfrac{#1}{#2} %
+    \if\relax\detokenize{#3}\relax\else%
+        + \tnsarith@short@contfracgene@star@recu@#3\@nil%
     \fi%
 }
